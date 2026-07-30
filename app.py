@@ -96,18 +96,30 @@ try:
     # 4. ENCABEZADO Y LOGO
     col_logo, col_titulo = st.columns([1, 5])
     
+    posibles_logos = [
+        "Logos Electroingeniería-01.jpg", 
+        "logo.png", 
+        "logo.jpg", 
+        "logo.jpeg"
+    ]
+    logo_encontrado = None
+    
+    for nombre_logo in posibles_logos:
+        if os.path.exists(nombre_logo):
+            logo_encontrado = nombre_logo
+            break
+            
     with col_logo:
-        if os.path.exists("logo.png"):
-            st.image("logo.png", width=140)
+        if logo_encontrado:
+            st.image(logo_encontrado, width=150)
         else:
-            st.markdown("### 🏢")
+            st.warning("⚠️ No se encontró la imagen del logo")
             
     with col_titulo:
         st.title("Libro Maestro de Documentos")
         st.caption("Sistema de Gestión de Calidad | Control de Documentación, Tipos y Tiempos")
 
     st.markdown("---")
-
     # 5. FILTROS EN BARRA LATERAL
     st.sidebar.header("🔍 Filtros de Control")
     
