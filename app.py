@@ -38,57 +38,35 @@ GREEN = "#2E7D32"
 st.markdown(
     f"""
     <style>
-        .stApp {{ background: {LIGHT}; }}
-        [data-testid="stSidebar"] {{ background: #FFFFFF; border-right: 1px solid #E2E8F0; }}
-        .block-container {{ padding-top: 1.2rem; padding-bottom: 2rem; max-width: 1600px; }}
-        h1, h2, h3 {{ color: {DARK}; }}
-        .section-title {{
-            font-size: 1.05rem; font-weight: 800; color: {DARK};
-            margin-top: 0.4rem; margin-bottom: 0.55rem;
+        .stApp {{ background: #F3F5F8; }}
+        [data-testid="stSidebar"] {{ background: #FFFFFF; border-right: 1px solid #DCE3EC; }}
+        .block-container {{ padding-top: .8rem; padding-bottom: 2rem; max-width: 1700px; }}
+        .topbar {{
+            background: linear-gradient(115deg, #0B1F3A 0%, #00369C 72%, #0B4BC1 100%);
+            border-radius: 16px; padding: 18px 22px; margin-bottom: 6px;
+            box-shadow: 0 8px 24px rgba(11,31,58,.16);
+            border-bottom: 4px solid {CORPORATE_YELLOW};
         }}
-        .section-subtitle {{ font-size: 0.84rem; color: {MUTED}; margin-bottom: 0.8rem; }}
-        .hero {{
-            background: linear-gradient(135deg, #FFFFFF 0%, #F7FAFF 100%);
-            border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px 22px;
-            box-shadow: 0 4px 18px rgba(15,23,42,0.05);
-        }}
-        .hero-kicker {{ color: {CORPORATE_BLUE}; font-size: 0.75rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }}
-        .hero-title {{ color: {DARK}; font-size: 1.85rem; line-height: 1.15; font-weight: 800; margin-top: .25rem; }}
-        .hero-copy {{ color: {MUTED}; font-size: .92rem; margin-top: .45rem; }}
-        .decision-box {{
-            background: #FFFFFF; border-left: 5px solid {CORPORATE_BLUE};
-            border-top: 1px solid #E2E8F0; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0;
-            padding: 14px 16px; border-radius: 8px; margin-bottom: 10px;
-        }}
-        .decision-label {{ color: {MUTED}; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }}
-        .decision-text {{ color: {DARK}; font-size: .96rem; font-weight: 700; margin-top: .2rem; }}
-        .risk-critical {{ border-left-color: {RED}; }}
-        .risk-high {{ border-left-color: {ORANGE}; }}
-        .risk-medium {{ border-left-color: {CORPORATE_YELLOW}; }}
-        .risk-low {{ border-left-color: {GREEN}; }}
-        .mini-card {{
-            background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:12px 14px;
-            min-height: 110px; box-shadow:0 2px 10px rgba(15,23,42,.04);
-        }}
-        .mini-label {{ color:{MUTED}; font-size:.76rem; font-weight:700; }}
-        .mini-value {{ color:{DARK}; font-size:1.45rem; font-weight:800; margin-top:.2rem; }}
-        .mini-note {{ color:{MUTED}; font-size:.72rem; margin-top:.2rem; }}
-        .status-pill {{
-            display:inline-block; padding:4px 9px; border-radius:999px; font-size:.72rem; font-weight:800;
-        }}
-        .good {{ background:#E8F5E9; color:#1B5E20; }}
-        .warning {{ background:#FFF4E5; color:#9A3412; }}
-        .danger {{ background:#FDECEC; color:#991B1B; }}
-        .neutral {{ background:#EEF2F7; color:#475569; }}
-        div[data-testid="stMetric"] {{
-            background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px;
-            padding:13px 15px; box-shadow:0 2px 10px rgba(15,23,42,.04);
-        }}
-        div[data-testid="stMetricLabel"] p {{ color:{MUTED}; font-weight:700; font-size:.78rem; }}
-        div[data-testid="stMetricValue"] {{ color:{CORPORATE_BLUE}; }}
-        button[data-baseweb="tab"] {{ font-weight:700 !important; color:{MUTED} !important; }}
-        button[data-baseweb="tab"][aria-selected="true"] {{ color:{CORPORATE_BLUE} !important; }}
-        .small-note {{ color:{MUTED}; font-size:.76rem; }}
+        .topbar-kicker {{ color: #FFD91A; font-size: .72rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }}
+        .topbar-title {{ color: #FFFFFF; font-size: 2rem; line-height: 1.08; font-weight: 850; margin-top: 2px; }}
+        .topbar-subtitle {{ color: rgba(255,255,255,.82); font-size: .86rem; margin-top: 6px; }}
+        .topbar-date {{ color: #64748B; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; }}
+        .topbar-logo {{ background:#FFFFFF; border-radius:12px; padding:7px; display:flex; align-items:center; justify-content:center; min-height:82px; border:1px solid #E1E7EF; }}
+        .section-title {{ font-size: 1.08rem; font-weight: 850; color:#18212F; margin-top:.35rem; margin-bottom:.45rem; }}
+        .section-subtitle {{ font-size:.82rem; color:#64748B; margin-bottom:.8rem; }}
+        .decision-box {{ background:#FFFFFF; border-left:5px solid {CORPORATE_BLUE}; border-top:1px solid #E1E7EF; border-right:1px solid #E1E7EF; border-bottom:1px solid #E1E7EF; padding:13px 15px; border-radius:10px; margin-bottom:10px; min-height:82px; }}
+        .decision-label {{ color:#64748B; font-size:.69rem; font-weight:850; text-transform:uppercase; letter-spacing:.07em; }}
+        .decision-text {{ color:#18212F; font-size:.88rem; font-weight:750; margin-top:.25rem; line-height:1.28; }}
+        .risk-critical {{ border-left-color:{RED}; }} .risk-high {{ border-left-color:{ORANGE}; }} .risk-medium {{ border-left-color:{CORPORATE_YELLOW}; }} .risk-low {{ border-left-color:{GREEN}; }}
+        .manager-callout {{ background:#0B1F3A; color:#FFFFFF; border-radius:12px; padding:13px 16px; margin:6px 0 14px 0; }}
+        .manager-callout .label {{ color:#FFD91A; font-size:.67rem; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }}
+        .manager-callout .text {{ color:#FFFFFF; font-size:.94rem; font-weight:750; margin-top:3px; }}
+        div[data-testid="stMetric"] {{ background:#FFFFFF; border:1px solid #E1E7EF; border-radius:12px; padding:12px 14px; box-shadow:0 3px 12px rgba(15,23,42,.045); min-height:104px; }}
+        div[data-testid="stMetricLabel"] p {{ color:#64748B; font-weight:750; font-size:.75rem; }}
+        div[data-testid="stMetricValue"] {{ color:{CORPORATE_BLUE}; font-weight:850; }}
+        button[data-baseweb="tab"] {{ font-weight:800 !important; color:#64748B !important; }}
+        button[data-baseweb="tab"][aria-selected="true"] {{ color:{CORPORATE_BLUE} !important; border-bottom:3px solid {CORPORATE_YELLOW} !important; }}
+        .small-note {{ color:#64748B; font-size:.75rem; }}
     </style>
     """,
     unsafe_allow_html=True,
@@ -373,47 +351,87 @@ f_expired = f_approved[f_approved["DIAS_PARA_VENCER"].notna() & (f_approved["DIA
 f_next30 = f_approved[f_approved["DIAS_PARA_VENCER"].between(0, 30, inclusive="both")].copy()
 f_next90 = f_approved[f_approved["DIAS_PARA_VENCER"].between(31, 90, inclusive="both")].copy()
 f_cycle = f_approved["DIAS_CICLO_APROBACION"].dropna()
-
 f_coverage = pct(len(f_approved), len(f_active))
 f_current = f_approved[f_approved["DIAS_PARA_VENCER"].isna() | (f_approved["DIAS_PARA_VENCER"] >= 0)]
 f_formalization = pct(len(f_current), len(f_active))
 f_avg_cycle = f_cycle.mean() if not f_cycle.empty else np.nan
 f_median_cycle = f_cycle.median() if not f_cycle.empty else np.nan
 f_pct_cycle_30 = f_cycle.le(30).mean() * 100 if not f_cycle.empty else np.nan
+f_pct_cycle_gt365 = f_cycle.gt(365).mean() * 100 if not f_cycle.empty else np.nan
+f_velocity = 100.0 if f_cycle.empty else max(0, min(100, (f_pct_cycle_30 * .7) + ((100 - min(f_pct_cycle_gt365, 100)) * .3)))
+f_codes = set(f_active[col_codigo].dropna().astype(str).str.strip()) if col_codigo else set()
+f_matched_codes = f_codes.intersection(binaps_codes)
+f_repository_pct = pct(len(f_matched_codes), len(f_codes))
+f_required_cols = [c for c in [col_codigo, col_nombre, col_proceso, col_estado] if c]
+f_missing_required = int(f_active[f_required_cols].isna().any(axis=1).sum()) if f_required_cols else 0
+f_duplicated_codes = int(f_active[col_codigo].dropna().astype(str).str.strip().duplicated(keep=False).sum()) if col_codigo else 0
+f_missing_approval = int(f_approved[col_aprobacion].isna().sum()) if col_aprobacion else 0
+f_missing_expiry = int(f_approved[col_vigencia].isna().sum()) if col_vigencia else 0
+f_data_quality = max(0, 100 - pct(f_missing_required, len(f_active)) * .5 - pct(f_duplicated_codes, max(len(f_active), 1)) * .3 - pct(f_missing_approval, max(len(f_approved), 1)) * .1 - pct(f_missing_expiry, max(len(f_approved), 1)) * .1)
+f_health_score = round(f_coverage * .30 + f_formalization * .20 + f_repository_pct * .15 + f_velocity * .15 + f_data_quality * .20, 1)
+f_health_level = risk_class(f_health_score)
 
 # ============================================================
 # ENCABEZADO
 # ============================================================
-header_left, header_right = st.columns([1.8, 5])
-with header_left:
+logo_col, title_col, date_col = st.columns([1.0, 5.8, 1.3], vertical_alignment="center")
+with logo_col:
     if os.path.exists(LOGO_FILE):
-        st.image(LOGO_FILE, width=170)
-with header_right:
+        st.markdown('<div class="topbar-logo">', unsafe_allow_html=True)
+        st.image(LOGO_FILE, width=145)
+        st.markdown('</div>', unsafe_allow_html=True)
+    else:
+        st.markdown('<div class="topbar-logo"><strong style="color:#00369C;font-size:1.4rem;">EI</strong></div>', unsafe_allow_html=True)
+with title_col:
     st.markdown(
         f"""
-        <div class="hero">
-            <div class="hero-kicker">Control gerencial</div>
-            <div class="hero-title">Estado ejecutivo del sistema documental</div>
-            <div class="hero-copy">El dashboard traduce el Libro Maestro en cobertura, riesgo, prioridad y acciones de intervención.</div>
+        <div class="topbar">
+            <div class="topbar-kicker">CONTROL GERENCIAL</div>
+            <div class="topbar-title">Libro Maestro de Documentos</div>
+            <div class="topbar-subtitle">Estado ejecutivo del sistema documental · riesgo · cumplimiento · prioridades · acción</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+with date_col:
+    st.markdown(
+        f"""
+        <div style="padding:12px 4px 0 4px;">
+            <div class="topbar-date">Fecha de corte</div>
+            <div style="color:#18212F;font-size:1.05rem;font-weight:850;margin-top:4px;">{TODAY.strftime('%d/%m/%Y')}</div>
+            <div style="color:#64748B;font-size:.72rem;margin-top:4px;">Vista: {len(f_active):,} documentos</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-st.write("")
-
 # ============================================================
 # KPI PRINCIPALES
 # ============================================================
 k1, k2, k3, k4, k5, k6 = st.columns(6)
-k1.metric("Índice de salud documental", f"{health_score:.1f}/100", health_level)
-k2.metric("Cobertura documental", f"{f_coverage:.1f}%", f"{len(f_approved):,} aprobados / {len(f_active):,}")
+k1.metric("Salud documental", f"{f_health_score:.1f}/100", f"Nivel {f_health_level}")
+k2.metric("Cumplimiento documental", f"{f_formalization:.1f}%", f"{len(f_current):,} vigentes / {len(f_active):,}")
 k3.metric("Backlog no creado", f"{len(f_not_created):,}", f"{pct(len(f_not_created), len(f_active)):.1f}% del universo")
-k4.metric("Documentos vencidos", f"{len(f_expired):,}", f"{pct(len(f_expired), len(f_approved)):.1f}% de aprobados")
-k5.metric("En riesgo 90 días", f"{len(f_next30)+len(f_next90):,}", f"{len(f_next30)} en 30d / {len(f_next90)} en 31-90d")
-k6.metric("Ciclo mediano aprobación", format_days(f_median_cycle), f"Promedio: {format_days(f_avg_cycle)}")
+k4.metric("Vencidos", f"{len(f_expired):,}", f"{pct(len(f_expired), len(f_approved)):.1f}% de aprobados")
+k5.metric("Riesgo ≤90 días", f"{len(f_next30)+len(f_next90):,}", f"{len(f_next30)} ≤30d · {len(f_next90)} 31–90d")
+k6.metric("Velocidad de aprobación", f"{f_pct_cycle_30:.1f}%" if not pd.isna(f_pct_cycle_30) else "N/D", f"≤30 días · mediana {format_days(f_median_cycle)}")
 
-st.write("")
+with st.expander("¿Qué significa cada KPI?", expanded=False):
+    st.markdown(
+        """
+        **Salud documental:** índice de 0 a 100 que combina cobertura, formalización, presencia en Binaps, velocidad del ciclo de aprobación y calidad del dato. Es una regla de gestión configurable, no un indicador normativo.
+
+        **Cumplimiento documental:** porcentaje del universo activo que está aprobado y vigente. Responde: “¿qué parte del sistema está realmente formalizada y utilizable hoy?”.
+
+        **Backlog no creado:** documentos definidos en el Maestro que todavía no están creados. Mide el trabajo pendiente de formalización.
+
+        **Vencidos:** documentos aprobados cuya fecha de vigencia ya pasó. Es riesgo documental actual.
+
+        **Riesgo ≤90 días:** documentos aprobados cuya vigencia termina en los próximos 90 días. Es riesgo preventivo.
+
+        **Velocidad de aprobación:** porcentaje de documentos aprobados cuyo ciclo entre creación y aprobación fue de 30 días o menos. La mediana muestra el tiempo típico sin que unos pocos casos extremos distorsionen la lectura.
+        """
+    )
 
 # ============================================================
 # ALERTA EJECUTIVA
@@ -440,6 +458,15 @@ if alert_messages:
     )
 else:
     st.success("No se detectan alertas críticas con los filtros seleccionados.")
+
+# ============================================================
+# LECTURA GERENCIAL
+# ============================================================
+manager_text = f"Prioridad actual: {len(f_expired)} vencidos + {len(f_not_created)} no creados + {len(f_next30)+len(f_next90)} con riesgo de vencimiento en 90 días."
+st.markdown(
+    f'<div class="manager-callout"><div class="label">Lectura para comité gerencial</div><div class="text">{manager_text}</div></div>',
+    unsafe_allow_html=True,
+)
 
 # ============================================================
 # TABS
@@ -475,7 +502,7 @@ with tab_exec:
     with c1:
         gauge = go.Figure(go.Indicator(
             mode="gauge+number",
-            value=health_score,
+            value=f_health_score,
             number={"suffix": "/100", "font": {"size": 34, "color": DARK}},
             title={"text": "Índice de Salud Documental", "font": {"size": 18, "color": DARK}},
             gauge={
@@ -496,7 +523,7 @@ with tab_exec:
     with c2:
         components = pd.DataFrame({
             "Componente": ["Cobertura", "Formalización", "Repositorio", "Velocidad", "Calidad del dato"],
-            "Puntaje": [f_coverage, f_formalization, repository_pct, velocity_component, data_quality],
+            "Puntaje": [f_coverage, f_formalization, f_repository_pct, f_velocity, f_data_quality],
         }).sort_values("Puntaje")
         fig = px.bar(components, x="Puntaje", y="Componente", orientation="h", text="Puntaje")
         fig.update_traces(marker_color=CORPORATE_BLUE, texttemplate="%{text:.1f}", textposition="outside")
@@ -508,7 +535,7 @@ with tab_exec:
     decisions = [
         ("Intervención inmediata", f"Atacar {len(f_expired)} documentos vencidos y {len(f_not_created)} no creados.", "danger" if (len(f_expired)+len(f_not_created)) else "good"),
         ("Velocidad", f"El ciclo mediano es {format_days(f_median_cycle)} y {f_pct_cycle_30:.1f}% termina en ≤30 días." if not pd.isna(f_pct_cycle_30) else "No hay suficientes datos de ciclo.", "warning" if not pd.isna(f_pct_cycle_30) and f_pct_cycle_30 < 70 else "good"),
-        ("Disponibilidad", f"{repository_pct:.1f}% de los códigos activos aparecen en Binaps.", "warning" if repository_pct < 90 else "good"),
+        ("Disponibilidad", f"{f_repository_pct:.1f}% de los códigos seleccionados aparecen en Binaps.", "warning" if f_repository_pct < 90 else "good"),
         ("Vigencia", f"{len(f_next30)+len(f_next90)} documentos presentan riesgo de vencimiento en 90 días.", "warning" if len(f_next30)+len(f_next90) else "good"),
     ]
     for col, (label, text, cls) in zip(decision_cols, decisions):
