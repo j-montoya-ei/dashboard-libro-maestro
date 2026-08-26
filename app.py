@@ -71,6 +71,8 @@ def metric(title: str, value_id: str) -> html.Div:
 
 
 app = Dash(__name__, title="Libro Maestro | Centro de control")
+server = app.server
+
 app.layout = html.Div(
     [
         html.Div(
