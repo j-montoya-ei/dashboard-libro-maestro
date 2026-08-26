@@ -120,8 +120,10 @@ app.layout = html.Div(
                         dash_table.DataTable(
                             id="data-table",
                             page_size=15,
+                            page_action="custom",
                             sort_action="native",
-                            filter_action="native",
+                            filter_action="none",
+                            sort_mode="single",
                             style_table={"overflowX": "auto"},
                             style_cell={"textAlign": "left", "padding": "8px", "minWidth": "130px", "maxWidth": "320px", "whiteSpace": "normal"},
                             style_header={"backgroundColor": ACCENT, "color": "white", "fontWeight": "bold"},
@@ -157,7 +159,7 @@ def chart_or_empty(message: str):
     Output("metric-total", "children"), Output("metric-approved", "children"), Output("metric-not-created", "children"),
     Output("metric-approval-days", "children"), Output("metric-review-days", "children"), Output("result-count", "children"),
     Output("status-chart", "figure"), Output("unit-chart", "figure"), Output("type-chart", "figure"), Output("process-chart", "figure"),
-    Output("data-table", "data"), Output("data-table", "columns"), Output("chart-selection-label", "children"),
+    Output("chart-selection-label", "children"),
     Input("filter-unidad-de-negocio", "value"), Input("filter-macroproceso", "value"), Input("filter-proceso", "value"),
     Input("filter-estado", "value"), Input("filter-tipo-de-documento", "value"), Input("filter-dates", "start_date"), Input("filter-dates", "end_date"),
     Input("chart-selection", "data"),
@@ -185,18 +187,37 @@ def update_dashboard(unit, macro, process, status, doc_type, start_date, end_dat
     for figure in figures:
         figure.update_layout(template="plotly_white", margin={"t": 55, "b": 25, "l": 25, "r": 25})
 
-    display = filtered.copy()
-    for column in display.columns:
-        if "FECHA" in column:
-            display[column] = display[column].dt.strftime("%Y-%m-%d")
-    display = display.astype(object).where(display.notna(), "")
     return (
         f"{len(filtered):,}", f"{approved:,}", f"{not_created:,}",
         f"{approval_days:.0f} días" if pd.notna(approval_days) else "N/D",
         f"{review_days:.0f} días" if pd.notna(review_days) else "N/D",
         f"{len(filtered):,} registros encontrados", figures[0], figures[1], figures[2], figures[3],
-        display.to_dict("records"), [{"name": column, "id": column} for column in display.columns],
         f"🔎 Selección activa: {chart_selection['value']}" if chart_selection else "💡 Haz clic en una barra o segmento para filtrar todo el dashboard.",
+    )
+
+
+@app.callback(
+    Output("data-table", "data"), Output("data-table", "columns"), Output("data-table", "page_count"),
+    Input("filter-unidad-de-negocio", "value"), Input("filter-macroproceso", "value"), Input("filter-proceso", "value"),
+    Input("filter-estado", "value"), Input("filter-tipo-de-documento", "value"), Input("filter-dates", "start_date"),
+    Input("filter-dates", "end_date"), Input("chart-selection", "data"), Input("data-table", "page_current"),
+    Input("data-table", "page_size"),
+)
+def update_table(unit, macro, process, status, doc_type, start_date, end_date, chart_selection, page_current, page_size):
+    filtered = filter_data(unit, macro, process, status, doc_type, start_date, end_date, chart_selection)
+    display = filtered.copy()
+    for column in display.columns:
+        if "FECHA" in column:
+            display[column] = display[column].dt.strftime("%Y-%m-%d")
+    display = display.astype(object).where(display.notna(), "")
+    page_current = page_current or 0
+    page_size = page_size or 15
+    page_start = page_current * page_size
+    page_data = display.iloc[page_start:page_start + page_size]
+    return (
+        page_data.to_dict("records"),
+        [{"name": column, "id": column} for column in display.columns],
+        max(1, (len(display) + page_size - 1) // page_size),
     )
 
 
