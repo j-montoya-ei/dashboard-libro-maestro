@@ -189,7 +189,7 @@ def update_dashboard(unit, macro, process, status, doc_type, start_date, end_dat
     for column in display.columns:
         if "FECHA" in column:
             display[column] = display[column].dt.strftime("%Y-%m-%d")
-    display = display.fillna("")
+    display = display.astype(object).where(display.notna(), "")
     return (
         f"{len(filtered):,}", f"{approved:,}", f"{not_created:,}",
         f"{approval_days:.0f} días" if pd.notna(approval_days) else "N/D",
