@@ -1,0 +1,15 @@
+name: Keep Streamlit Alive
+
+on:
+  schedule:
+    # Se ejecuta automáticamente cada 3 días a las 12:00 UTC
+    - cron: '0 12 */3 * *'
+  workflow_dispatch: # Permite ejecutar el ping manualmente desde la web de GitHub
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enviar petición a la app de Streamlit
+        run: |
+          curl -sS https://dashboard-libro-maestro-q.streamlit.app/ > /dev/null

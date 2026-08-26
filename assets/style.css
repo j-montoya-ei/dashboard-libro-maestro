@@ -1,0 +1,51 @@
+* { box-sizing: border-box; }
+:root { --navy: #12355b; --blue: #1d4f80; --gold: #f0a202; --ink: #1f334d; --muted: #65758b; --line: #dfe7f0; }
+body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #f5f7fb; color: var(--ink); }
+.app-shell { min-height: 100vh; }
+.header { margin-left: 280px; min-height: 136px; display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; background: linear-gradient(115deg, var(--navy), var(--blue)); color: white; padding: 28px 42px;
+    border-bottom: 4px solid var(--gold); box-shadow: 0 4px 18px rgba(18, 53, 91, .14); }
+.header-content { display: flex; align-items: center; gap: 16px; }
+.brand-mark, .sidebar-mark { width: 48px; height: 48px; display: grid; place-items: center; flex: 0 0 auto;
+    border-radius: 12px; background: var(--gold); color: var(--navy); font-size: 17px; font-weight: 800; letter-spacing: .5px; }
+.header h1 { margin: 0 0 7px; color: white; font-size: clamp(24px, 3vw, 35px); font-weight: 700; letter-spacing: -.5px; }
+.header p { margin: 0; color: #dbe8f5; font-size: 14px; }
+.header-status { padding: 8px 13px; border: 1px solid rgba(255,255,255,.28); border-radius: 20px;
+    color: #e6f5eb; font-size: 12px; white-space: nowrap; }
+.sidebar { position: fixed; top: 0; bottom: 0; width: 280px; padding: 26px 18px 24px; background: #fff;
+    border-right: 1px solid var(--line); overflow-y: auto; z-index: 2; }
+.sidebar-brand { display: flex; align-items: center; gap: 11px; padding: 4px 4px 26px; color: var(--navy); }
+.sidebar-brand strong, .sidebar-brand small { display: block; }
+.sidebar-brand strong { font-size: 13px; letter-spacing: .8px; }
+.sidebar-brand small { margin-top: 3px; color: var(--muted); font-size: 11px; }
+.sidebar-mark { width: 38px; height: 38px; border-radius: 9px; font-size: 13px; }
+.sidebar h3 { padding-top: 18px; margin: 0 0 18px; border-top: 1px solid var(--line); color: var(--navy); font-size: 16px; }
+.filter { margin-bottom: 16px; }
+.filter-label, .metric-title { display: block; margin-bottom: 7px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .15px; }
+.dash-dropdown .Select-control, .dash-dropdown .Select-menu-outer { border-color: #cbd7e5; }
+.clear-button { width: 100%; margin: 0 0 12px; padding: 9px 10px; border: 1px solid #c7d5e4; border-radius: 7px;
+    background: #f8fafc; color: var(--navy); cursor: pointer; font-size: 12px; font-weight: 700; }
+.clear-button:hover { background: var(--navy); color: white; }
+.selection-label { min-height: 17px; margin: 0 0 16px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+.content { margin-left: 280px; padding: 30px 42px 46px; }
+.content h2 { margin: 0 0 18px; color: var(--navy); font-size: 21px; letter-spacing: -.2px; }
+.metrics, .chart-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 26px; }
+.metrics > div { min-height: 98px; border: 1px solid var(--line) !important; border-top: 3px solid #4f83b4 !important;
+    border-radius: 10px !important; background: white !important; box-shadow: 0 3px 12px rgba(31, 51, 77, .05); }
+.metric-title { margin-bottom: 12px; }
+.metric-value { color: var(--navy); font-size: 25px; font-weight: 750; }
+.chart-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.chart-row > div { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 11px; background: white;
+    box-shadow: 0 3px 12px rgba(31, 51, 77, .05); }
+.chart-row .js-plotly-plot { width: 100% !important; }
+.detail { margin-top: 6px; padding: 24px; border: 1px solid var(--line); border-radius: 11px; background: white;
+    box-shadow: 0 3px 12px rgba(31, 51, 77, .05); }
+.detail h2 { margin-bottom: 5px; }
+.detail > div:nth-child(2) { color: var(--muted); font-size: 13px; }
+.download-button { margin: 16px 0 20px; padding: 10px 15px; border: 0; border-radius: 7px; background: var(--navy);
+    color: white; cursor: pointer; font-size: 12px; font-weight: 700; }
+.download-button:hover { background: var(--blue); }
+@media (max-width: 1050px) { .metrics { grid-template-columns: repeat(3, 1fr); } .header-status { display: none; } }
+@media (max-width: 900px) { .header { margin-left: 0; min-height: 116px; padding: 22px 20px; }
+    .sidebar { position: static; width: auto; padding: 20px; } .sidebar-brand { padding-bottom: 18px; }
+    .content { margin-left: 0; padding: 22px 18px 35px; } .metrics, .chart-row { grid-template-columns: 1fr; } }
