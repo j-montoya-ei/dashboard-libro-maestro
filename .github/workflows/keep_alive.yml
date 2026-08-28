@@ -1,4 +1,4 @@
-name: Keep Streamlit Alive
+name: Keep Dash App Alive
 
 on:
   schedule:
@@ -10,6 +10,7 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Enviar petición a la app de Streamlit
+      - name: Enviar petición a la aplicación
         run: |
-          curl -sS https://dashboard-libro-maestro-q.streamlit.app/ > /dev/null
+          test -n "${{ secrets.RENDER_APP_URL }}"
+          curl --fail --silent --show-error --location "${{ secrets.RENDER_APP_URL }}/" > /dev/null
